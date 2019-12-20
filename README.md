@@ -57,7 +57,7 @@ API DOCUMENTATIONS:
 - Example
 ```
   {
-    email: 'elan@gmail.com',
+    username: 'elan@gmail.com',
     password: 'pass',
   }
   ```
