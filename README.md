@@ -152,12 +152,60 @@ API DOCUMENTATIONS:
  ```
 
 
-<h1>10 Random Celebrities</h1>
+<h1>20 Random Celebrities</h1>
 
-*method url*: `/api/celebs/game`
+*method url*: `/api/celebs`
 
 *http method*: **[GET]**
 
 - Body: Not needed!
+
+- Response
+##### 200 (Ok)
+###### Example response
+
+```
+[
+  {
+    "id": 169,
+    "name": "Ayrton Senna",
+    "info": "Brazilian racing driver",
+    "birth": 1960,
+    "death": 1994,
+    "image_url": "http://static.tvmaze.com/uploads/images/medium_portrait/205/514773.jpg"
+  },
+  {
+    "id": 82,
+    "name": "Richard E. Grant",
+    "info": "British actor",
+    "birth": 1957,
+    "death": 0,
+    "image_url": "http://static.tvmaze.com/uploads/images/medium_portrait/5/12791.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Marvin Gaye",
+    "info": "American singer-songwriter",
+    "birth": 1939,
+    "death": 1984,
+    "image_url": "http://static.tvmaze.com/uploads/images/medium_portrait/68/171783.jpg"
+  }
+  .
+  .
+  .
+  .
+  .
+  .
+  .
+  .
+]
+```
+
+##### 500 (Internal Server Error)
+###### Example response
+  ```
+ { 
+ message: "Something went wrong with the server!"
+ }
 
  =========================== USERS ENDPOINTS START HERE ===========================
