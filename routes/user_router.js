@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const jsonWT = require('jsonwebtoken')
+const { restricted } = require('./middleware.js') 
 
 const helpers = require('../helpers/user_helpers.js')
 
@@ -15,13 +16,32 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.put('/', async (req, res) => {
+router.get('/loggedin', restricted, async (req, res) => {
+    let { username } = req.decJWT;
+    const token = req.headers.authorization;
 
+    try {
+        if(token){
+        const user = await helpers.getUser(username)
+
+        res.status(200).json(user)             
+        } else {
+            res.status(400).json({message: 'User not logged in'})
+        }
+           
+
+    } catch {
+        res.status(500).json({message: 'Something went wrong with the server'})
+    }
 })
 
-router.delete('/', async (req, res) => {
+// router.put('/', async (req, res) => {
+
+// })
+
+// router.delete('/', async (req, res) => {
     
-})
+// })
 
 module.exports = router
 
