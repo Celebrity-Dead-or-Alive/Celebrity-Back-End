@@ -6,6 +6,7 @@ const cors = require('cors')
 const userRotuer = require('../routes/user_router.js')
 const authRouter = require('../routes/auth_router.js')
 const celebRouter = require('../routes/celebs_router.js')
+const scoreRouter = require('../routes/scores_router.js')
 
 server.use(express.json())
 server.use(helmet())
@@ -22,5 +23,6 @@ server.get('/', (req, res) => {
 server.use('/api/users', userRotuer)
 server.use('/api/auth', authRouter)
 server.use('/api/celebs', celebRouter)
+server.use('/api/scores', scoreRouter)
 
 module.exports = server

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const jsonWT = require('jsonwebtoken')
 const { restricted } = require('./middleware.js') 
+const { generateToken } = require('./middleware.js')
 
 const helpers = require('../helpers/user_helpers.js')
 
@@ -19,6 +20,7 @@ router.get('/', async (req, res) => {
 router.get('/loggedin', restricted, async (req, res) => {
     let { username } = req.decJWT;
     const token = req.headers.authorization;
+    console.log(req.decJWT);
 
     try {
         if(token){
@@ -35,9 +37,26 @@ router.get('/loggedin', restricted, async (req, res) => {
     }
 })
 
-// router.put('/', async (req, res) => {
+router.put('/loggedin', restricted, async (req, res) => {
+    let username = req.decJWT.username;
+    let changes = req.body;
 
-// })
+    try {
+        if(username){
+            const user = await helpers.getUser(username)
+                   
+            if(user){
+                const updatedUser = await helpers.updateUser(changes, user)
+                res.json({message: "Successfully updated user", updatedUser}) 
+                console.log(updatedUser)               
+            } 
+        } else {
+            res.status(400).json({message: 'User does not exist'})
+        }
+    } catch {
+        res.status(500).json({message: 'Something went wrong with the server'})
+    }
+})
 
 // router.delete('/', async (req, res) => {
     
