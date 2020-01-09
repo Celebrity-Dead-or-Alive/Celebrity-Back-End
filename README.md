@@ -209,3 +209,212 @@ API DOCUMENTATIONS:
  }
 
  =========================== USERS ENDPOINTS START HERE ===========================
+  ```
+
+ <h1>Retrieve all registered users</h1>
+
+*method url*: `/api/users/`
+
+*http method*: **[GET]**
+
+- Body: Not needed!
+
+- Response
+##### 200 (ok)
+
+```
+{
+  {
+    "id": 1,
+    "firstName": "John",
+    "lastName": "Doe",
+    "username": "johndoe123",
+    "password": "$2a$04$tGsmB.ES.aHkHZFcMjMPL.3OEuOeNsW71JiNPzYFvZtTDNlISG8uC",
+    "email": "john@gmail.com"
+  },
+  {
+    "id": 2,
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "username": "janedoe",
+    "password": "$2a$04$G1pt0rcev80eijP7GIgyKOxT6vm8woPA0i.DK8jFsIe6fh1rZ3Q7u",
+    "email": "jane@gmail.com"
+  }
+}
+```
+
+##### 401 (Unauthorized)
+###### Example response
+  ```
+ { 
+ message: "User must be logged in to view users"
+ }
+ ```
+
+##### 500 (Internal Server Error)
+###### Example response
+  ```
+ { 
+ message: "Something went wrong with the server!"
+ }
+ ```
+
+  <h1>Retrieve logged in user</h1>
+
+*method url*: `/api/users/loggedin`
+
+*http method*: **[GET]**
+
+- Body: Not needed!
+
+- Response
+##### 200 (ok)
+
+```
+{
+    "id": 5,
+    "firstName": "Elizabeth",
+    "lastName": "Olsen",
+    "username": "lizolsen",
+    "password": "$2a$04$Bvqk9C1ct1313IrOluDh4e/ZNxV1WCJoddzqYHEwv5wOcUkr9vcii",
+    "email": "lizolsen@gmail.com"
+}
+```
+
+##### 401 (Unauthorized)
+###### Example response
+  ```
+ { 
+ message: "User not logged in"
+ }
+ ```
+
+ ##### 500 (Internal Server Error)
+###### Example response
+  ```
+ { 
+ message: "Something went wrong with the server!"
+ }
+ ```
+
+   <h1>Retrieve all users scores</h1>
+
+*method url*: `/api/scores`
+
+*http method*: **[GET]**
+
+- Body: Not needed!
+
+- Response
+##### 200 (ok)
+
+```
+[
+    {
+        "id": 1,
+        "user_id": 5,
+        "total": 7,
+        "correctAnswer": 7,
+        "wrongAnswer": 13,
+        "time": "1min"
+    },
+    {
+      "id": 2,
+      "user_id": 6,
+      "total": 10,
+      "correctAnswer": 10,
+      "wrongAnswer": 10,
+      "time": "1min, 15sec"
+    }
+]
+```
+
+##### 401 (Unauthorized)
+###### Example response
+  ```
+ { 
+ message: "User must be logged in to view scores"
+ }
+ ```
+
+ ##### 500 (Internal Server Error)
+###### Example response
+  ```
+ { 
+ message: "Something went wrong with the server!"
+ }
+ ```
+
+  <h1>Retrieve logged in users score</h1>
+
+*method url*: `/api/scores/userScore`
+
+*http method*: **[GET]**
+
+- Body: Not needed!
+
+- Response
+##### 200 (ok)
+
+```
+[
+    {
+        "id": 1,
+        "user_id": 5,
+        "total": 7,
+        "correctAnswer": 7,
+        "wrongAnswer": 13,
+        "time": "1min"
+    }
+]
+```
+
+##### 401 (Unauthorized)
+###### Example response
+  ```
+ { 
+ message: "User not logged in"
+ }
+ ```
+
+ ##### 500 (Internal Server Error)
+###### Example response
+  ```
+ { 
+ message: "Something went wrong with the server!"
+ }
+ ```
+
+   <h1>Add a users score</h1>   
+
+*method url*: `/api/scores/userScore`
+
+*http method*: **[POST]**
+
+- Body
+
+| name             | type    | required |
+| ---------------- | ------- | :------: |
+| `total`          | Integer |   Yes    |
+| `correctAnswer`  | Integer |   Yes    |
+| `wrongAnswer`    | Integer |   Yes    |
+| `time`           | String  |   Yes    |
+
+- Response
+##### 201 (created)
+
+##### 401 (Unauthorized)
+###### Example response
+  ```
+ { 
+ message: "User must be logged in to add score"
+ }
+ ```
+
+ ##### 500 (Internal Server Error)
+###### Example response
+  ```
+ { 
+ message: "Something went wrong with the server!"
+ }
+ ```

@@ -4,12 +4,17 @@ const { restricted } = require('./middleware.js')
 
 const helpers = require('../helpers/scores_helpers.js')
 
-router.get('/', async (req, res) => {
-
+router.get('/', restricted, async (req, res) => {
+    const { id } = req.decJWT;
     try {
-        const scores = await helpers.getScores()
+        if(id) {
+            const scores = await helpers.getScores()
 
-        res.status(200).json(scores)
+            res.status(200).json(scores)            
+        } else {
+            res.status(401).json({message: 'User must be logged in to view scores'})
+        }
+
     } catch {
         res.status(500).json({message: 'Something went wrong with the server'})
     }
@@ -43,7 +48,7 @@ router.post('/userScore', restricted, async (req, res) => {
             const addedScore = await helpers.addScore(score, id)
             res.status(201).json(addedScore)
         } else {
-            res.status(404).json({message: 'Login user to add score'})
+            res.status(404).json({message: 'User must be logged in to add score'})
         }
 
     } catch {
