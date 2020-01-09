@@ -33,7 +33,7 @@ router.get('/loggedin', restricted, async (req, res) => {
 
         res.status(200).json(user)             
         } else {
-            res.status(400).json({message: 'User not logged in'})
+            res.status(401).json({message: 'User not logged in'})
         }
            
 
@@ -56,7 +56,7 @@ router.put('/loggedin', restricted, async (req, res) => {
                 console.log(updatedUser)               
             } 
         } else {
-            res.status(400).json({message: 'User does not exist'})
+            res.status(401).json({message: 'User does not exist'})
         }
     } catch {
         res.status(500).json({message: 'Something went wrong with the server'})

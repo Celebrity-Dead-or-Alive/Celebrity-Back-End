@@ -29,7 +29,7 @@ router.get('/userScore', restricted, async (req, res) => {
             const userScore = await helpers.getUsersScore(id)  
             res.status(200).json(userScore)          
         } else {
-            res.status(400).json({message: 'User not logged in'})
+            res.status(401).json({message: 'User not logged in'})
         }
 
     } catch {
@@ -48,7 +48,7 @@ router.post('/userScore', restricted, async (req, res) => {
             const addedScore = await helpers.addScore(score, id)
             res.status(201).json(addedScore)
         } else {
-            res.status(404).json({message: 'User must be logged in to add score'})
+            res.status(401).json({message: 'User must be logged in to add score'})
         }
 
     } catch {
